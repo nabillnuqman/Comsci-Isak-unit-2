@@ -11,3 +11,17 @@ Contents
   1. [Design](#design)
   1. [Development](#development)
   1. [Evalution](#evaluation)
+
+Planning
+----------
+
+Design
+---------
+
+Development
+--------
+How to count from 0 - 15 in binary
+![Binary Diagram](binary.png)
+When we run out of digits, we start back at 0 again, but add 1 on the left.
+https://www.mathsisfun.com/binary-number-system.html 
+
