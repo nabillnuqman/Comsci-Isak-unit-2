@@ -17,3 +17,7 @@ http://www.multiwingspan.co.uk/arduino.php?page=led5
 
 - In class we learned the different ways people approached this. First was Filips way, which was to use a lot of if commands. That was much more simpler and easier to understand but meant more lines of code, not converting to decimals, and not scalable. Tom's way was grouping the outputs and saving much more lines, it was harder to understand yet a smarter way to approach it since it was scalable.
 - We also learned the different binary gates, including OR, AND, NOT, and XOR. This allows us to make groups of outputs and was used to make codes much shorter and simpler than using a million if commands.
+
+19/November/2019
+
+- Today in class we spend most of our time doing a worksheet on binary gates and K-maps. I somewhat understood how to convert the gate symbols into equations and vice versa but I still have trouble grasping the concept of the Tables and how to read them. I will try to do more research to understand it further.
