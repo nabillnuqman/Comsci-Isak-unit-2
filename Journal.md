@@ -21,3 +21,6 @@ http://www.multiwingspan.co.uk/arduino.php?page=led5
 19/November/2019
 
 - Today in class we spend most of our time doing a worksheet on binary gates and K-maps. I somewhat understood how to convert the gate symbols into equations and vice versa but I still have trouble grasping the concept of the Tables and how to read them. I will try to do more research to understand it further.
+
+20/November/2019
+- Today in class we were given a task to learn how to turn on different numbers like how a sports game has those score point lED's. 
