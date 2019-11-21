@@ -14,6 +14,24 @@ Contents
 
 Planning
 ----------
+The clients are astronauts. They are currently doing research on the plants Mars and moon. They need to communicate to relay information of what they have discovered on these planets. The signal they have is very limited and slow. In order to adapt to this and communicate they have to use the use different languages to send codes that are short and able to be deciphered. 
+
+The application has to allow for the follwing:
+- Communication between Earth and Mars uses Morse code.
+- Communication between Mars and the Moon uses Binary code.
+- Provide a communication system that allow stations to communicate seamlessly using English.
+Keyboard input on each station is limited to 2 push buttons. 
+100W lights are buzzers are available.
+
+
+### Rationale for proposed solution
+Since they have to use easy and decipherable languages. We have proposed to use Morse and binary code. We are using Arduino because it is able to use these languages and translate them using LED's using the code. Arduino allows us to make code translating between the languages and also implement the code into a circuit which will then allow these astronauts to communicate.
+
+### Success Criteria
+This are measuarable outcomes
+1. 2 Push Buttons allow the user to communicate 
+2. Morse is able to be translated to English with the Lights
+3. Binary is able to be translated to Morse with the lights
 
 Design
 ---------
@@ -24,4 +42,49 @@ How to count from 0 - 15 in binary
 ![Binary Diagram](binary.png)
 When we run out of digits, we start back at 0 again, but add 1 on the left.
 https://www.mathsisfun.com/binary-number-system.html 
+
+We learned how to allow LED's to be turned on and off using push buttons
+![Binary Button and LED program](binarybutton.png)
+
+```
+int butA = 10;
+int butB = 11;
+int out1 = 3;
+int out2 = 4;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(butA, INPUT);
+  pinMode(butB, INPUT);
+  pinMode(out1, OUTPUT);
+  pinMode(out2, OUTPUT);
+}
+
+void loop()
+{
+  
+  int A=digitalRead(butA);
+  int B=digitalRead(butB);
+  
+  if(A== 0 && B == 0){
+    digitalWrite(out1, HIGH);
+    digitalWrite(out2, LOW);
+  }
+  if(A== 0 && B == 1){
+    digitalWrite(out1, LOW);
+    digitalWrite(out2, HIGH);
+  }
+  if(A== 1 && B == 0){
+    digitalWrite(out1, LOW);
+    digitalWrite(out2, HIGH);
+  }
+  if(A== 1 && B == 1){
+    digitalWrite(out1, LOW);
+    digitalWrite(out2, LOW);
+  }
+}
+```
+We had to define the different outputs and inputs, The inputs being butA and butB, which are 10 and 11, as you can see the the green wires connect butA and B to the Arduino UNO on number 10 and 11. The outputs are the 2 LED's which are connected via the yellow and blue wire to number 3 and 4. The LOW means that the LED is off and the HIGH means that the LED is on. 
+
 
