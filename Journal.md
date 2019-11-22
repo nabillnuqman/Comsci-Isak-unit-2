@@ -24,3 +24,4 @@ http://www.multiwingspan.co.uk/arduino.php?page=led5
 
 20/November/2019
 - Today in class we were given a task to learn how to turn on different numbers like how a sports game has those score point lED's. 
+![Binary button led table](binaryledtable.jpg)
