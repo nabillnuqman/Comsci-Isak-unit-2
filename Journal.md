@@ -30,3 +30,9 @@ http://www.multiwingspan.co.uk/arduino.php?page=led5
 - Usability is the degree of ease with which products such as software and Web applications can be used to achieve required goals effectively and efficiently. Usability assesses the level of difficulty involved in using a user interface. Although usability can only be quantified through indirect measures and is therefore a nonfunctional requirement, it is closely related to a product's functionality.
 Reference:
 https://www.techopedia.com/definition/4919/usability 
+
+It's not you. bad doors are everywhere. Vox 2016.
+
+- Feedback
+- Discoverability
+- Human centered design
