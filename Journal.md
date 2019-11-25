@@ -25,3 +25,7 @@ http://www.multiwingspan.co.uk/arduino.php?page=led5
 20/November/2019
 - Today in class we were given a task to learn how to turn on different numbers like how a sports game has those score point lED's. 
 ![Binary button led table](binaryledtable.jpg)
+
+25/November/2019
+- Usability is the degree of ease with which products such as software and Web applications can be used to achieve required goals effectively and efficiently. Usability assesses the level of difficulty involved in using a user interface. Although usability can only be quantified through indirect measures and is therefore a nonfunctional requirement, it is closely related to a product's functionality.
+https://www.techopedia.com/definition/4919/usability 
