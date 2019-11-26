@@ -1,3 +1,15 @@
+Feedback Nov 26 (You can deleted this section later. It will remain in the history of the file)
+
+|No.|How to improve        |
+|-|------------- |
+|①| I can understand what you are trying to say with the success criteria, however, better if you can rewrite the sentences to make them cristal clear. **For example:** 2. Morse is able to be translated to English with the Lights => The system is able to translate between English and Morse code| 
+|②| Let try to include at least 5 success criteria. They can be small such as: The system uses 100W lights for communication.|
+|③| Keep adding pictures, small parts of code, sketches, flow diagrams to your development section. Keep the journal only for reflection which answer the questions: What did we do today in class? What did you learn? to do list.|
+|④　|Try to think in different justifications for using Arduino. One reason is that we are learning to use this platform in the classroom. Research about the qualities of an Arduino and that can be the selling point for using it here.|
+|⑤|　Add your References at the bottom of the page using MLA format. I have added the section for you to fill in.|
+
+----
+
 # Comsci-Isak-unit-2
 This is for all the files and work done for unit 2
 Interplanetary Communication
@@ -30,8 +42,8 @@ Since they have to use easy and decipherable languages. We have proposed to use 
 ### Success Criteria
 This are measuarable outcomes
 1. 2 Push Buttons allow the user to communicate 
-2. Morse is able to be translated to English with the Lights
-3. Binary is able to be translated to Morse with the lights
+1. Morse is able to be translated to English with the Lights
+1. Binary is able to be translated to Morse with the lights
 
 Design
 ---------
@@ -87,4 +99,5 @@ void loop()
 ```
 We had to define the different outputs and inputs, The inputs being butA and butB, which are 10 and 11, as you can see the the green wires connect butA and B to the Arduino UNO on number 10 and 11. The outputs are the 2 LED's which are connected via the yellow and blue wire to number 3 and 4. The LOW means that the LED is off and the HIGH means that the LED is on. 
 
+## References
 
