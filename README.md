@@ -46,6 +46,9 @@ Describe the process needed to convert a number from Binary to Decimal:
 4. If the binary number digit is 0, then just write 0 below the digit
 5. Add all the digits below the binary numbers
 
+we used TinkerCad to simulate the use of 4 LED's to count in binary from 1 to 15.
+![Binary LED code](binaryled.png)
+
 How to count from 0 - 15 in binary
 ![Binary Diagram](binary.png)
 When we run out of digits, we start back at 0 again, but add 1 on the left.
@@ -151,6 +154,8 @@ The way this code works is that the there is an array of letter, digits and opti
 ** Update: the code was looping too fast for me so i increased the delay to 1000.
 
 ## References
+“MultiWingSpan.” Multiwingspan, http://www.multiwingspan.co.uk/arduino.php?page=led5.
+
 Person, and wikiHow. “How to Convert from Binary to Decimal.” WikiHow, WikiHow, 12 Nov. 2019, https://www.wikihow.com/Convert-from-Binary-to-Decimal. 
 
 Binary Number System, Math Is Fun, https://www.mathsisfun.com/binary-number-system.html.
