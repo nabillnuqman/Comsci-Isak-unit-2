@@ -36,3 +36,7 @@ It's not you. bad doors are everywhere. Vox 2016.
 - Feedback
 - Discoverability
 - Human centered design
+
+
+02/December/2019
+- Today in class we learned tried to make the arduino program of english inputting come to life, so we used our practical skills in arduino to display english inputs using lcd's and buttons.
