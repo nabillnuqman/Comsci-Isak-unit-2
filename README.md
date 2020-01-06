@@ -153,6 +153,10 @@ else(text += key);{
 The way this code works is that the there is an array of letter, digits and options, the buttons allow us to select the them and switch. The code will loop the array and when a button is pressed it goes to the next option until all the options are gone through then it restarts at the first option. 
 ** Update: the code was looping too fast for me so i increased the delay to 1000.
 
+**Protocols
+
+
+
 ## References
 “MultiWingSpan.” Multiwingspan, http://www.multiwingspan.co.uk/arduino.php?page=led5.
 
