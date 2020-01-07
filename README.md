@@ -153,8 +153,16 @@ else(text += key);{
 The way this code works is that the there is an array of letter, digits and options, the buttons allow us to select the them and switch. The code will loop the array and when a button is pressed it goes to the next option until all the options are gone through then it restarts at the first option. 
 ** Update: the code was looping too fast for me so i increased the delay to 1000.
 
-**Protocols
-
+**Protocols**
+Protocals are a standard set of rules that allow electronic devices to communicate with each other. These rules include what type of data may be transmitted, what commands are used to send and receive data, and how data transfers are confirmed.
+In our program to communicate with other planets, protocals are essential in order to communicate effectively and avoid misinterpretations and misunderstandings.
+I have come up with several protocals:
+1. 1 Light rapidly blinks when wanting to communicate with another planet.
+2. Light stays off when not in use or the end of a message.
+3. Between Earth and Mars the light blinks at a speed of 0.2 seconds in between blinks.
+4. Between Mars and Moon the light blinks at a speed of 1 second in between blinks.
+5. 1 light on from receiving planet when signal is understood and message is ready to be received.
+6. Both lights on from receiving planet when message is received and understood.
 
 
 ## References
@@ -164,3 +172,4 @@ Person, and wikiHow. “How to Convert from Binary to Decimal.” WikiHow, WikiH
 
 Binary Number System, Math Is Fun, https://www.mathsisfun.com/binary-number-system.html.
 
+Christensson, Per. "Protocol Definition." TechTerms. Sharpened Productions, 29 March 2019. Web. 07 January 2020. <https://techterms.com/definition/protocol>.
