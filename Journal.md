@@ -40,3 +40,7 @@ It's not you. bad doors are everywhere. Vox 2016.
 
 02/December/2019
 - Today in class we learned tried to make the arduino program of english inputting come to life, so we used our practical skills in arduino to display english inputs using lcd's and buttons.
+
+13/January/2020
+![Machine Cycle](machine.jpg)
+- Today we learned about the machine cycle. A machine cycle consists of the steps that a computer's processor executes whenever it receives a machine language instruction. It is the most basic CPU operation, and modern CPUs are able to perform millions of machine cycles per second. The cycle consists of three standard steps: fetch, decode and execute. 
