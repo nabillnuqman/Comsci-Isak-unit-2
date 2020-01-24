@@ -199,6 +199,593 @@ I have come up with several protocals:
 5. Between words is 4 seconds (light off)
 6. Indicate the beginning and end of a message it’ll flash five times (for half a second per flash) (light on
 
+**Code Development**
+The following is the code for the English to Morse Translation
+```.c
+// include the library code:
+#include <LiquidCrystal.h>
+int index = 0; 
+// add all the letters and digits to the keyboard
+String keyboard[]={"A", "B","SENT", "MORSE", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "DEL"};
+String text = "";
+int numOptions = 28;
+int i = 0;
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(12, 11, 5, 4, 9, 8);
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(13, OUTPUT);
+  pinMode(10, OUTPUT);
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  // Print a message to the LCD.
+  attachInterrupt(0, changeLetter, RISING);//button A in port 2
+  attachInterrupt(1, selected, RISING);//button B in port 3
+}
+
+void loop() {
+  // set the cursor to column 0, line 1
+  // (note: line 1 is the second row, since counting begins with 0):
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(keyboard[index]);
+  lcd.setCursor(0, 1);
+  lcd.print(text);
+  delay(100);
+}
+
+//This function changes the letter in the keyboard
+void changeLetter(){
+  static unsigned long last_interrupt_time = 0;
+  unsigned long interrupt_time = millis();
+  if (interrupt_time - last_interrupt_time > 200)
+  {
+  
+    last_interrupt_time = interrupt_time;// If interrupts come faster than 200ms, assum
+    index++;
+      //check for the max row number
+    if(index==numOptions){
+      index=0; //loop back to first row
+    } 
+ }
+}
+
+//this function adds the letter to the text or send the msg
+void selected(){
+  static unsigned long last_interrupt_time = 0;
+  unsigned long interrupt_time = millis();
+  if (interrupt_time - last_interrupt_time > 200)
+  {
+  
+    last_interrupt_time = interrupt_time;// If interrupts come faster than 200ms, assum
+    
+    String key = keyboard[index];
+    if (key == "DEL")
+    {
+      int len = text.length();
+      text.remove(len-1);
+    }
+    else if(key == "SENT")
+    {
+      sent();
+      text="";
+    }
+    else{
+      text += key;
+    }
+    index = 0; //restart the index
+  }
+}
+ 
+void sent() {
+  Serial.print("begin ");
+      
+int strLen = text.length(); // setting len to length to text
+for (int i = 0; i < strLen; i++) {  // cycling through each letter of text 
+  switch (text.charAt(i)) { // translating for i’th letter
+ 
+case 'A':
+  dot();
+  dash();
+  wait();
+  break;
+case 'B':
+  dash();
+  dot();
+  dot();
+  dot();
+  wait();
+  break;
+case 'C': 
+  dash();
+  dot();
+  dash();
+  dot();
+  wait();
+  break;
+case 'D':
+  dash();
+  dot();
+  dot();
+  wait();
+  break;
+case 'E':
+  dot();
+  wait();
+  break;
+case 'F': 
+  dot();
+  dot();
+  dash();
+  dot();
+  wait();
+  break;
+case 'G':
+  dash();
+  dash();
+  dot();
+  wait();
+  break;
+case 'H':
+  dot();
+  dot();
+  dot();
+  dot();
+  wait();
+  break;
+case 'I':
+  dot();
+  dot();
+  wait();
+  break;
+case 'J':
+  dot();
+  dash();
+  dash();
+  dash();
+  wait();
+  break;
+case 'K':
+  dash();
+  dot();
+  dash();
+  wait();
+  break;
+case 'L':
+  dot();
+  dash();
+  dot();
+  dot();
+  wait();
+  break;
+case 'M':
+  dash();
+  dash();
+  wait();
+  break;
+case 'N':
+  dash();
+  dot();
+  wait();
+  break;
+case 'O':
+  dash();
+  dash();
+  dash();
+  wait();
+  break;
+case 'P':
+  dot();
+  dash();
+  dash();
+  dot();
+  wait();
+  break;
+case 'Q':
+  dash();
+  dash();
+  dot();
+  dash();
+  wait();
+  break;
+case 'R':
+  dot();
+  dash();
+  dot();
+  wait();
+  break;
+case 'S':
+  dot();
+  dot();
+  dot();
+  wait();
+  break;
+case 'T':
+  dash();
+  wait();
+  break;
+case 'U':
+  dot();
+  dot();
+  dash();
+  wait();
+  break;
+case 'V':
+  dot();
+  dot();
+  dot();
+  dash();
+  wait();
+  break;
+case 'W':
+  dot();
+  dash();
+  dash();
+  wait();
+  break;
+case 'X':
+  dash();
+  dot();
+  dot();
+  dash();
+  wait();
+  break;
+case 'Y':
+  dash();
+  dot();
+  dash();
+  dash();
+  wait();
+  break;
+case 'Z': 
+  dash();
+  dash();
+  dot();
+  dot();
+  wait();
+  break; 
+case ' ':
+  digitalWrite(13, LOW);
+  delay(4000);
+if (i < strLen - 1) { 
+ Serial.print("done");
+  // for (int i = 0; i < 7; i++) { // blink light five times to indicate beginning of message
+ // digitalWrite(13, HIGH);
+ // delay(300);
+ // digitalWrite(13, LOW);
+ // delay(300); }
+} 
+  }}}
+
+void dot() {  // defining the dot function as one light being ON for one second 
+Serial.print("dot ");
+digitalWrite(13, HIGH);
+delay(1000);
+digitalWrite(13, LOW);
+delay(1000);
+}
+
+void dash() { // defining the dash function as the light being on for three seconds
+Serial.print("dash ");
+digitalWrite(13, HIGH);
+digitalWrite(10, HIGH);
+delay(3000);
+digitalWrite(13, LOW);
+digitalWrite(10, LOW);
+delay(1000);
+}
+
+void wait() { // defining the wait function 
+  delay(2000); // between letters is two second delay
+} 
+```
+**Code Explanation**
+
+We have already developed a code above to allow to input English letters with 2 Buttons.
+With that There wasn't much left to add.
+We needed a way capable to translate the english input into Morse code.
+ 
+```.c
+ else if(key == "SENT")
+    {
+      sent();
+      text="";
+```
+The code above ;key "Sent"; will redirect the program to another fucntion (sent)    
+```.c      
+void sent() {
+  Serial.print("begin ");
+      
+int strLen = text.length(); // setting len to length to text
+for (int i = 0; i < strLen; i++) {  // cycling through each letter of text 
+  switch (text.charAt(i)) { // translating for i’th letter
+```
+The function above is a for loop that cycles through each letter in the String Keyboard, Then it compares the letter and the actions needed to be performed for that later, for that a switch case is used.
+A switch case allows programmers to specify different code that should be executed in various conditions.
+```.c
+case 'Z': 
+  dash();
+  dash();
+  dot();
+  dot();
+  wait();
+  break; 
+```
+The code above is an example of a case for the letter Z. it includes the functions needed to display the letter Z in Morse using lights.
+
+```.c
+void dot() {  // defining the dot function as one light being ON for one second 
+Serial.print("dot ");
+digitalWrite(13, HIGH);
+delay(1000);
+digitalWrite(13, LOW);
+delay(1000);
+}
+
+void dash() { // defining the dash function as the light being on for three seconds
+Serial.print("dash ");
+digitalWrite(13, HIGH);
+digitalWrite(10, HIGH);
+delay(3000);
+digitalWrite(13, LOW);
+digitalWrite(10, LOW);
+delay(1000);
+}
+
+void wait() { // defining the wait function 
+  delay(2000); // between letters is two second delay
+} 
+```
+These are the functions of Dot, dash and wait, which gives instructionsto the lights. These were used to reduce lines of code of the program and decreases work load.
+
+**Code Development**
+The following is the code for the Morse to English Translation
+
+```.c
+// include the library code:
+#include <LiquidCrystal.h>
+int index = 0; 
+String keyboard[]={".-", "-...","-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", "RESET", "DEL"};
+String text = "";
+String chosen = "";
+int numOptions = 29;
+int i = 0;
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(12, 11, 5, 4, 9, 8);
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(13, OUTPUT);
+  pinMode(10, OUTPUT);
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  // Print a message to the LCD.
+  attachInterrupt(0, changeLetter, RISING);//button A in port 2
+  attachInterrupt(1, selected, RISING);//button B in port 3
+}
+
+void loop() {
+  // set the cursor to column 0, line 1
+  // (note: line 1 is the second row, since counting begins with 0):
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print(keyboard[index]);
+  lcd.setCursor(0, 1);
+  lcd.print(chosen); // CHANGE TEXT TO TRANSLATED
+  delay(100);
+}
+
+//This function changes the letter in the keyboard
+void changeLetter(){
+  static unsigned long last_interrupt_time = 0;
+  unsigned long interrupt_time = millis();
+  if (interrupt_time - last_interrupt_time > 200)
+  {
+  
+    last_interrupt_time = interrupt_time;// If interrupts come faster than 200ms, assum
+    index++;
+      //check for the max row number
+    if(index==numOptions){
+      index=0; //loop back to first row
+    } 
+ }
+}
+
+//this function adds the letter to the text or send the msg
+void selected(){
+  static unsigned long last_interrupt_time = 0;
+  unsigned long interrupt_time = millis();
+  if (interrupt_time - last_interrupt_time > 200)
+  {
+  
+    last_interrupt_time = interrupt_time;// If interrupts come faster than 200ms, assum
+    
+    String key = keyboard[index];
+    if (key == "DEL")
+    {
+      int len = text.length();
+      text.remove(len-1);
+    }
+    else if (key == "RESET")
+    {
+      chosen = "";
+    }
+    else{
+      text += key;
+      convert();
+    }
+    index = 0; //restart the index
+  }
+}
+
+void convert() {
+  Serial.print("Starting conversion");
+  lcd.setCursor(0, 1);
+  if (text == ".-" ) {
+    String key = "A"; 
+    chosen += key;
+  }
+  else if (text == ".-" ) {
+    String key = "B"; 
+    chosen += key;
+  }
+  else if (text == "-.-.") {
+    String key = "C"; 
+    chosen += key;
+  }
+  else if (text == "-..") {
+    String key = "D"; 
+    chosen += key;
+  }
+  else if (text == ".") {
+    String key = "E"; 
+    chosen += key;
+  }
+  else if (text == "..-.") {
+    String key = "F"; 
+    chosen += key;
+  }
+  else if (text == "--.") {
+    String key = "G";
+    chosen += key;    
+  }
+  else if (text == "....") {
+    String key = "H"; 
+    chosen += key;
+  }
+  else if (text == "..") {
+    String key = "I"; 
+    chosen += key;
+  }
+  else if (text == ".---") {
+    String key = "J"; 
+    chosen += key;
+  }
+  else if (text == "-.-") {
+    String key = "K"; 
+    chosen += key;
+  }
+  else if (text == ".-..") {
+    String key = "L"; 
+    chosen += key;
+  }
+  else if (text == "--") {
+    String key = "M"; 
+    chosen += key;
+  }
+  else if (text == "-.") {
+    String key = "N"; 
+    chosen += key;
+  }
+  else if (text == "---") {
+    String key = "O"; 
+    chosen += key;
+  }
+  else if (text == ".-" ) {
+    String key = "P"; 
+    chosen += key;
+  }
+  else if (text == "-.-.") {
+    String key = "Q"; 
+    chosen += key;
+  }
+  else if (text == "-..") {
+    String key = "R"; 
+    chosen += key;
+  }
+  else if (text == ".") {
+    String key = "S"; 
+    chosen += key;
+  }
+  else if (text == "..-.") {
+    String key = "T"; 
+    chosen += key;
+  }
+  else if (text == "--.") {
+    String key = "U"; 
+    chosen += key;
+  }
+  else if (text == "...-") {
+    String key = "V"; 
+    chosen += key;
+  }
+  else if (text == ".--") {
+    String key = "W"; 
+    chosen += key;
+  }
+  else if (text == "-..-") {
+    String key = "X"; 
+    chosen += key;
+  }
+  else if (text == "-.--") {
+    String key = "Y";
+    chosen += key;
+  }
+  else if (text == "--..") {
+    String key = "Z";
+    chosen += key; 
+  }
+  text = "";
+}
+```
+**Code Explanation**
+
+The code for Morse to English is much easier after completing the English to Morse translation.
+
+```.c
+String keyboard[]={".-", "-...","-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", "RESET", "DEL"};
+```
+Firstly we had to change the string Keyboard to Morse.
+
+```.c
+ void convert() { 
+  if (text == ".-" ) {
+    String key = "A";
+    chosen += key;
+  }
+  text = ""; 
+}
+```
+The code above, similar to a switch case, it compares the letter and the actions needed to be performed for that letter. For this program we found it difficult to use switch case and decided to use if statements.
+
+**Code Testing** 
+
+
+![Morse Test](testmorse.png)
+
+
+
+This test is made to ensure the program and all it's options work properly, it tests the ability to input letters, translate letters, delete letters, and clear a row.
+
+This is video evidence of the test
+
+[https://www.youtube.com/watch?v=nQMU-dAM5Pw&list=PLS6syomu_xC6TR8MhTaBuTHIIJVKAyJ-w&index=3&t=0s]
+
+
+![Morse Test](testmorse.png)
+
+This test is made to ensure that it is able to input and display letters, use lights to display it in morse, and delete letters,
+
+This is video evidence of the test
+
+[https://www.youtube.com/watch?v=HkToqDY9gbA&list=PLS6syomu_xC6TR8MhTaBuTHIIJVKAyJ-w&index=1]
+
+Evaluation
+----------
+
+
+![Success Criteria](successcriteria.png)
+
+From this we can conclude that the the program is mostly successful. What kept it from reaching it's full potential is the exclusion of Binary and the disability of using spaces.
+
+**Further Improvements**
+
+Despite being mostly successful, It is incredibly slow to translate words and decipher words. It is really inefficient. That is due to the amount of time it takes to reach a wanted letter and then sending/deleting it.  This probably where a time based solution would shine, increasing the time of intervals for switching letters could save much time. This could also be resolved by increasing number of buttons/inputs for the system. Another solution could be using autocorrect or a suggesting software where it would suggest words for the user and offer autocorrect for a misspelled letter. 
+
+After making the English to Morse Program we tried to make both integrate both programs into one but unfortunately didn’t have the time figure that out, but if both programs were together then it would increase the efficiency, resulting in less people needed to man the program. 
 
 
 ## References
@@ -209,3 +796,5 @@ Person, and wikiHow. “How to Convert from Binary to Decimal.” WikiHow, WikiH
 Binary Number System, Math Is Fun, https://www.mathsisfun.com/binary-number-system.html.
 
 Christensson, Per. "Protocol Definition." TechTerms. Sharpened Productions, 29 March 2019. Web. 07 January 2020. <https://techterms.com/definition/protocol>.
+
+“Switch...case.” Arduino Reference, www.arduino.cc/reference/en/language/structure/control-structure/switchcase/.
