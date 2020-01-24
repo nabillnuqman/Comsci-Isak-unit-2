@@ -35,6 +35,13 @@ This are measuarable outcomes
 4. The system uses 100W lights for communication
 5. The buttons allow for Sending, Deleting, Spacing, and digit's as well
 
+Design
+--------
+![System Diagram](systemdiagram.png)
+
+**Figure 1:** The Diagram above shows the hardware and software components for our system
+
+We have been tasked with Planet Earth, what that means is that we will be translating and receiving English and Morse. We will have to be able to Receive both Morse and English and translate them both using buttons as keyboards and LED's as signal for other planets to receive. We have dropped the task of Binary code as it appears to be very difficult.
 
 Development
 --------
@@ -54,6 +61,8 @@ How to count from 0 - 15 in binary
 When we run out of digits, we start back at 0 again, but add 1 on the left.
 
 We learned how to allow LED's to be turned on and off using push buttons
+
+
 ![Binary Button and LED program](binarybutton.png)
 
 ```
@@ -153,9 +162,27 @@ else(text += key);{
 The way this code works is that the there is an array of letter, digits and options, the buttons allow us to select the them and switch. The code will loop the array and when a button is pressed it goes to the next option until all the options are gone through then it restarts at the first option. 
 ** Update: the code was looping too fast for me so i increased the delay to 1000.
 
+
+### English To Morse System
+
+Firstly, we had to decide what kind of system would our application be. There were a few ideas here and there and so we decided to make a pros and cons diagram to decide.
+
+![Pros and Cons](prosandcons.png)
+
+
+**Figure 2:** The table aboves displays our thought process, in the end we decided to use the 2 light system.
+
+We were deciding between using a time based sytem or using 2 lights. What the diagram says basically is that time based system is much easier to code but a hassle for the client and other planets to understand. So we went ahead and decided to use the 2 lights system.
+
 **Protocols**
 Protocals are a standard set of rules that allow electronic devices to communicate with each other. These rules include what type of data may be transmitted, what commands are used to send and receive data, and how data transfers are confirmed.
 In our program to communicate with other planets, protocals are essential in order to communicate effectively and avoid misinterpretations and misunderstandings.
+![Examples of Protocols](protocols.png)
+
+
+**Figure 3:** The table above are some examples of different protocols used on the internet that we learned in class
+
+
 I have come up with several protocals:
 1. 1 Light rapidly blinks when wanting to communicate with another planet.
 2. Light stays off when not in use or the end of a message.
@@ -163,6 +190,15 @@ I have come up with several protocals:
 4. Between Mars and Moon the light blinks at a speed of 1 second in between blinks.
 5. 1 light on from receiving planet when signal is understood and message is ready to be received.
 6. Both lights on from receiving planet when message is received and understood.
+
+**Update We have agreed to use the following protocol for our system:**
+1. A dot means you light the light for one second (light on)
+2. A dash is three seconds (light on) 
+3. Between parts of letter is one second (light off)
+4. Between letters is two second (light off)
+5. Between words is 4 seconds (light off)
+6. Indicate the beginning and end of a message it’ll flash five times (for half a second per flash) (light on
+
 
 
 ## References
