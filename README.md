@@ -1,4 +1,15 @@
+## Feedback
+Good Job Bill. The following are some points you can improve in the future:
+
+1. when justifying the choice of hardware/software is good idea to research in the web page of the makers to see the benefits and unique properties of each, you can include that and use a citation.
+1. In your system diagram, is the box suppose to represent the Arduino? You could find a picture of the Arduino online and use it.
+1. In the **design** section you are missing flow diagrams
+1. God job with the **development** section and explaining impoartant parts of the code. Remember that every figure, table, code have its caption: Fig. 1, Table 1, Code 1. This is necessary to identify what you are refeering to in the text.
+1. You did not use your references in the text of the document, for example, "the authors said [1] that you need to use MLA"
+1. In the evaluation you can tell us exactly where in the current solution you could improve, and some ideas of how, and why that is needed.
+
 # Comsci-Isak-unit-2
+
 This is for all the files and work done for unit 2
 Interplanetary Communication
 ===========================
